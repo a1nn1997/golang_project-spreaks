@@ -1,0 +1,56 @@
+sqlite3 sharks.db  //go inside sqlite3  and create table sharks.db
+CREATE TABLE sharks(id integer NOT NULL, name text NOT NULL, sharktype text NOT NULL, length integer NOT NULL);
+
+//creating TABLE
+An ID
+The shark’s name
+The shark’s type
+The shark’s average length (in centimeters)
+
+INSERT INTO sharks VALUES (1, "Sammy", "Greenland Shark", 427);
+INSERT INTO sharks VALUES (2, "Alyoshka", "Great White Shark", 600);
+INSERT INTO sharks VALUES (3, "Himari", "Megaladon", 1800);
+
+//add these values in sharks
+INSERT INTO sharks VALUES (4, "Faiza", "Hammerhead Shark"); //as length is not nullable it will show error
+
+SELECT * FROM sharks;  //read table sharks
+1|Sammy|Greenland Shark|427
+2|Alyoshka|Great White Shark|600
+3|Himari|Megaladon|1800
+
+SELECT * FROM sharks WHERE id IS 1;
+1|Sammy|Greenland Shark|427 
+//read data with filter id is 1
+ALTER TABLE sharks ADD COLUMN age integer;  //add new column in shark table
+
+
+UPDATE sharks SET age = 272 WHERE id=1;
+UPDATE sharks SET age = 70 WHERE id=2;
+UPDATE sharks SET age = 40 WHERE id=3;
+//update values where id is mentioned
+
+new data
+
+1|Sammy|Greenland Shark|427|272
+2|Alyoshka|Great White Shark|600|70
+3|Himari|Megaladon|1800|40
+
+DELETE FROM sharks WHERE age <= 200; 
+// delete with filter
+
+1|Sammy|Greenland Shark|427|272
+2|Alyoshka|Great White Shark|600|70
+
+//create new table in db and insert data
+
+CREATE TABLE endangered (id integer NOT NULL, status text NOT NULL);
+INSERT INTO endangered VALUES (1,  "near threatened");
+
+SELECT sharks.id, sharks.name, sharks.sharktype, sharks.length, sharks.age, endangered.status FROM sharks INNER JOIN endangered on sharks.id = endangered.id;
+
+get specific data for entry in both table  
+
+1|Sammy|Greenland Shark|427|272|near threatened
+
+cntr + d    // exit sqlite database

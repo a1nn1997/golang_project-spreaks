@@ -1,0 +1,48 @@
+symmentic => package (main, essential) => import => struct for db-columns => apis fns func mains
+
+struct  (Name string 'json:"name"')  (Name *name 'json:"name"')  //basic models
+
+static he islie slices, pointer and struct application  
+
+import ( fmt    log    encoding/json    net/http    github.com/gorilla/mux )
+
+fn ( w, r) res req as pointer 
+
+//slices to json
+// id from params
+
+//run docker file
+
+sudo docker build --tag python-django .
+sudo docker run --publish 8000:8000 python-django
+
+
+
+//create ecs container for Dockerfile and deploy it on aws fargate
+
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 573313621831.dkr.ecr.ap-south-1.amazonaws.com
+
+docker tag go1 573313621831.dkr.ecr.ap-south-1.amazonaws.com
+//create repository inside ecr in aws account with name 
+docker push 573313621831.dkr.ecr.ap-south-1.amazonaws.com/go1
+//create cluser   //task defination //add container   // create services      
+
+
+
+
+
+//ec2 instance
+// create basic instance with SSH and Custom TCP with port no and aval anywhere
+// login to ec2instance
+
+sudo yum update -y \
+sudo yum install -y golang \
+// go to file and run 
+go mod tidy
+
+scp -i ~/ec2gotest1.pem -r ~/Desktop/windows_folder/destop/golang/project/project2\ \(crud\)/project2a\(static_dbless\) ec2-user@3.110.42.28:    //secure copy from os to remote host or ec2 instances 
+
+go run main.go
+
+
+

@@ -1,0 +1,6 @@
+// golang serverless  appln with api-gateway, lambda, and dynamodb:
+
+// zip main file
+
+// put main file inside build fn and run this command
+zip -jrm build/main.zip build/main

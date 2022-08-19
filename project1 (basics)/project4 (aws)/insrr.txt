@@ -1,0 +1,108 @@
+aws iam create-role --role-name lambda-ex --assume-role-policy-document '{"Version": "2012-10-17", "Statement"[{"Effect": "Allow", "Principal": {"Service": "lambda.amazonaws.com"}, "Action": "sts:AssumeRole"}]}'    //create role
+
+{
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "lambda-ex",
+        "RoleId": "AROAYK7BHT5DYLI5OIDIU",
+        "Arn": "arn:aws:iam::573313621831:role/lambda-ex",
+        "CreateDate": "2022-08-14T08:27:02+00:00",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "Service": "lambda.amazonaws.com"
+                    },
+                    "Action": "sts:AssumeRole"
+                }
+            ]
+        }
+    }
+}
+
+create trust-policy.json   //above code using trust-policy.json command
+
+aws iam create-role --role-name lambda-ex --assume-role-policy-document file://trust-policy.json
+
+aws iam attach-role-policy --role-name lambda-ex --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole   
+//execution for iam policy arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole 
+
+go build main.go
+
+// if go bulid give suggestion follow it
+go mod tidy
+go build main.go
+
+
+zip function.zip main
+//zip file for go lambda fns
+
+aws lambda create-function --function-name go-lamba-function-3 --zip-file fileb://function.zip --handler main --runtime go1.x --role arn:aws:iam::573313621831:role/lambda-ex   //fn name from go.mod zip file from locn before role 57..31 as amazonid
+
+{
+    "FunctionName": "go-lamba-function-3",
+    "FunctionArn": "arn:aws:lambda:ap-south-1:573313621831:function:go-lamba-function-3",
+    "Runtime": "go1.x",
+    "Role": "arn:aws:iam::573313621831:role/lambda-ex",
+    "Handler": "main",
+    "CodeSize": 4818265,
+:...skipping...
+{
+    "FunctionName": "go-lamba-function-3",
+    "FunctionArn": "arn:aws:lambda:ap-south-1:573313621831:function:go-lamba-function-3",
+    "Runtime": "go1.x",
+    "Role": "arn:aws:iam::573313621831:role/lambda-ex",
+    "Handler": "main",
+    "CodeSize": 4818265,
+    "Description": "",
+    "Timeout": 3,
+    "MemorySize": 128,
+{
+{
+    "FunctionName": "go-lamba-function-3",
+    "FunctionArn": "arn:aws:lambda:ap-south-1:573313621831:function:go-lamba-function-3",
+    "Runtime": "go1.x",
+    "Role": "arn:aws:iam::573313621831:role/lambda-ex",
+    "Handler": "main",
+    "CodeSize": 4818265,
+    "Description": "",
+
+    
+aws lambda invoke --function-name go-lamba-function-3 --cli-binary-format raw-in-base64-out --payload '{"What is your name?": "poppy","How old are you":25}' output.txt
+{
+    "StatusCode": 200,
+    "ExecutedVersion": "$LATEST"
+}
+
+//op is shown in output.txt invoke is to run that fn with ip
+{"Answer:":"poppy is 25 years old!"} 
+
+
+//  update lambda fn
+// make changes in file 
+go build main.go
+zip function.zip main
+//rebuild fn
+
+//write this update command below and rerun code
+aws lambda update-function-code --function-name go-lamba-function-3 --zip-file fileb://function.zip
+
+{
+    "FunctionName": "go-lamba-function-3",
+    "FunctionArn": "arn:aws:lambda:ap-south-1:573313621831:function:go-lamba-function-3",
+    "Runtime": "go1.x",
+    "Role": "arn:aws:iam::573313621831:role/lambda-ex",
+    "Handler": "main",
+    "CodeSize": 4818265,
+    "Description": "",
+:
+
+aws lambda invoke --function-name go-lamba-function-3 --cli-binary-format raw-in-base64-out --payload '{"What is your name?": "poppy","How old are you?":25}' output.txt
+{
+    "StatusCode": 200,
+    "ExecutedVersion": "$LATEST"
+}
+

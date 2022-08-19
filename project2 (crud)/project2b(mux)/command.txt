@@ -1,0 +1,21 @@
+import me fn and use it same as other fn dir put as go mode init link   link+dir_extension
+
+pkg file :- [ config (for configuring db) , models (for all models ), controller (for apis) , routes (for api routes)  , utils (for utility function) ]
+
+config -> app.go  :- [ package app , import ,var,  connect , get Db ]
+    import (gom,db )   var (me db)  (db * gorm.DB),  connect (connect database  //database type dependent getDb (to send db confign))
+
+contollers -> all apis
+
+models -> book.go       orm to connect db and db config
+
+routes -> basic routes
+
+deploy
+
+// config controller and models new
+
+// go get "github.com/gorilla/mux"  //install package inside go
+
+
+
