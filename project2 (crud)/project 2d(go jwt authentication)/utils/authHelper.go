@@ -15,6 +15,7 @@ func CheckUserType(c *gin.Context, role string) (err error){
 	return err
 }
 
+// ADMIN ONLY ACESS 
 func MathchUserTypeToUid(c *gin.Context,userId string) (err error){
 	userType := c.GetString("user_type")
 	uid := c.GetString("uid")

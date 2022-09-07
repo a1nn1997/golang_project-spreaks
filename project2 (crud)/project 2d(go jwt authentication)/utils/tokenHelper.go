@@ -23,9 +23,9 @@ type SignedDetails struct{
 	jwt.StandardClaims
 }
 
-var userCollection *mongo.Collection = database.OpenCollection(database.Client, "user")
+var userCollection *mongo.Collection = database.OpenCollection(database.Client, "user")  //search collection
 
-var SECRET_KEY string = os.Getenv("SECRET_KEY")
+var SECRET_KEY string = os.Getenv("SECRET_KEY")   //secret key not aval right now
 
 func GenenrateAllTokens(email string, firstName string, lastName string, userType string, uid string) (signedToken string, signedRefreshToken string, err error ){
 	claims := &SignedDetails{
@@ -36,14 +36,14 @@ func GenenrateAllTokens(email string, firstName string, lastName string, userTyp
 		User_type: userType,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Local().Add(time.Hour * time.Duration(24)).Unix(),
-		},
+		},  //set expire date of token
 	}
 	refreshClaims := &SignedDetails{
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Local().Add(time.Hour * time.Duration(168)).Unix(),
 		},
 	}
-	token,_ := jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString([]byte(SECRET_KEY))
+	token,_ := jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString([]byte(SECRET_KEY)) //set token
 	refreshToken, err := jwt.NewWithClaims(jwt.SigningMethodHS256, refreshClaims).SignedString([]byte(SECRET_KEY))
 
 	if(err != nil){
@@ -64,14 +64,14 @@ func UpdateAllTokens(signedToken string, signedRefreshToken string, userId strin
 		log.Panic(err)
 			return
 	}
-	updateObj= append(updateObj,bson.E{"updated_at",Updated_at})
+	updateObj= append(updateObj,bson.E{"updated_at",Updated_at})  //append the updated at object
 	upsert := true
-	filter :=bson.M{"user_id":userId}
+	filter :=bson.M{"user_id":userId}	//find user id
 	opt := options.UpdateOptions{
 		Upsert: &upsert,
 	}
 
-	_, err = userCollection.UpdateOne( ctx, filter,
+	_, err = userCollection.UpdateOne( ctx, filter,    //update object in user collection
 		bson.D{	{"$set", updateObj}, }, &opt,)
 		defer cancel()
 	if err != nil {
